@@ -16,8 +16,11 @@ const App = () => {
 
   const ConnexionNavigator = createNativeStackNavigator();
 
-  const ConnexionScreen = () => (
-    <Connexion onConnexion={() => setConnected(true)}></Connexion>
+  const ConnexionScreen = ({ navigation }) => (
+    <Connexion
+      navigation={navigation}
+      onConnexion={() => setConnected(true)}
+    ></Connexion>
   );
 
   return connected ? (
