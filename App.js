@@ -5,16 +5,37 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Inscription } from "./screens/Inscription/Inscription";
 import { Liste } from "./screens/Liste/Liste";
+import { AjoutTache } from "./screens/AjoutTache/AjoutTache";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useState } from "react";
 
 const App = () => {
   const Drawer = createDrawerNavigator();
 
-  return (
+  const [connected, setConnected] = useState(false);
+
+  const ConnexionNavigator = createNativeStackNavigator();
+
+  const ConnexionScreen = () => (
+    <Connexion onConnexion={() => setConnected(true)}></Connexion>
+  );
+
+  return connected ? (
     <Drawer.Navigator>
-      <Drawer.Screen component={Connexion} name="Login"></Drawer.Screen>
-      <Drawer.Screen component={Inscription} name="Sign in"></Drawer.Screen>
       <Drawer.Screen component={Liste} name="Stuff list"></Drawer.Screen>
+      <Drawer.Screen component={AjoutTache} name="Add task"></Drawer.Screen>
     </Drawer.Navigator>
+  ) : (
+    <ConnexionNavigator.Navigator>
+      <ConnexionNavigator.Screen
+        component={ConnexionScreen}
+        name="Login"
+      ></ConnexionNavigator.Screen>
+      <ConnexionNavigator.Screen
+        component={Inscription}
+        name="Sign in"
+      ></ConnexionNavigator.Screen>
+    </ConnexionNavigator.Navigator>
   );
 };
 

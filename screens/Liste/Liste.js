@@ -3,7 +3,7 @@ import useAppStyle from "../../AppStyles";
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 
-export const Liste = () => {
+export const Liste = ({ navigation }) => {
   const styles = useAppStyle();
 
   const [todoList, setTodoList] = useState([]);
@@ -15,7 +15,7 @@ export const Liste = () => {
       .then((liste) => {
         setTodoList(liste);
         console.log("received");
-      })
+      });
   }, []);
 
   return (
@@ -25,7 +25,11 @@ export const Liste = () => {
         data={todoList}
         renderItem={({ item }) => <Text>{item.title}</Text>}
       ></FlatList>
-      <Button fab icon="plus"></Button>
+      <Button
+        fab
+        icon="plus"
+        onPress={() => navigation.navigate("Add task")}
+      ></Button>
     </View>
   );
 };
