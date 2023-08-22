@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { Connexion } from "./screens/Connexion/Connexion";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { Inscription } from "./screens/Inscription/Inscription";
+import { Liste } from "./screens/Liste/Liste";
 
-export default function App() {
+const App = () => {
+  const Drawer = createDrawerNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Drawer.Navigator>
+      <Drawer.Screen component={Connexion} name="Login"></Drawer.Screen>
+      <Drawer.Screen component={Inscription} name="Sign in"></Drawer.Screen>
+      <Drawer.Screen component={Liste} name="Stuff list"></Drawer.Screen>
+    </Drawer.Navigator>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default () => {
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <StatusBar style="auto" />
+        <App></App>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+};
