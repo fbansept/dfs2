@@ -4,6 +4,16 @@ import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 
 export const Liste = ({ navigation }) => {
+  const stylesTask = {
+    padding: 15,
+    margin: 5,
+    backgroundColor: "#eee",
+    borderRadius: 5,
+    minHeight: 50,
+    width: "100%",
+    alignSelf: "center",
+  };
+
   const styles = useAppStyle();
 
   const [todoList, setTodoList] = useState([]);
@@ -20,10 +30,22 @@ export const Liste = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Nombre de tache à effectuer : {todoList.length}</Text>
+      <Text style={[styles.text, { marginBottom: 20 }]}>
+        Nombre de tache à effectuer : {todoList.length}
+      </Text>
       <FlatList
+        style={{ width: "100%", padding: 15 }}
         data={todoList}
-        renderItem={({ item }) => <Text>{item.title}</Text>}
+        renderItem={({ item }) => (
+          <View
+            style={[
+              stylesTask,
+              item.complete ? { backgroundColor: "#beebc0" } : {},
+            ]}
+          >
+            <Text>{item.title}</Text>
+          </View>
+        )}
       ></FlatList>
       <Button
         fab
